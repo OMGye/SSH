@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    
+    <hibernate-mapping>
+    <class name="cn.itcast.shop.vo.Order" table="orders">
+      <id name="oid">
+        <generator class="native"></generator>
+      </id>
+      <property name="total"/>
+      <property name="date"/>
+      <property name="name"/>
+      <property name="addr"/>
+      <property name="phone"/>
+      <property name="state"/>
+      <!-- 配置和用户的关系 -->
+      <many-to-one name="user" class="cn.itcast.shop.vo.User" column="uid" lazy="false"></many-to-one>
+      <!-- 配置和订单项的关系 -->
+      <set name="orderItems" cascade="save-update" lazy="false">
+        <key column="oid"></key>
+        <one-to-many class="cn.itcast.shop.vo.OrderItem"/>
+      </set>
+    </class>
+    </hibernate-mapping>
